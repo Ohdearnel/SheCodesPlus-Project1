@@ -1,0 +1,125 @@
+body {
+  background: linear-gradient(
+    89.9deg,
+    rgb(208, 246, 255) 0.1%,
+    rgb(255, 237, 237) 47.9%,
+    rgb(255, 255, 231) 100.2%
+  );
+  font-family: "Poppins", sans-serif;
+}
+
+div.placeName {
+  font-family: "Barlow", sans-serif;
+  color: rgb(161, 161, 255);
+  margin: 10px 20px 10px 20px;
+  padding-left: 20px;
+  font-weight: 600;
+  font-size: 34px;
+}
+
+div.description {
+  text-align: right;
+  margin: 30px 45px 0 0;
+  text-transform: capitalize;
+}
+
+heading {
+  font-size: 14px;
+}
+
+.citySearch {
+  margin: 15px 0 0 15px;
+}
+
+.flex-container {
+  display: flex;
+  flex-flow: column wrap;
+  align-content: flex-end;
+}
+.flex-container > .currentLocationButton {
+  text-align: centre;
+  margin: 15px 20px 0 20px;
+}
+.searchContainer {
+  padding-left: 5px;
+}
+
+.searchButton {
+  background: transparent;
+  color: #138496;
+  margin-top: 15px;
+  margin-right: 10px;
+}
+
+heading,
+.temperature,
+.mainHighsLows {
+  display: block;
+  line-height: 45px;
+  margin-left: 33px;
+}
+
+.temperature,
+.time,
+.mainHighsLows {
+  text-align: right;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+}
+
+.temperature,
+.mainHighsLows {
+  font-size: 15px;
+}
+
+.time {
+  line-height: 45px;
+  font-size: 14px;
+}
+
+.contentCard {
+  padding: 10px 0;
+  margin: 50px auto 23px;
+  background: #fff;
+}
+
+.flex-container > .mainIcon {
+  display: inline-block;
+  font-size: 14vw;
+  text-align: center;
+  color: rgb(252, 216, 98);
+  border: 1px #a0ddf7 solid;
+  padding: 15px;
+  margin: 15px 15px 0 0;
+}
+
+.dayCast {
+  font-size: 14px;
+}
+
+.col {
+  padding: 0 5px;
+}
+
+.forecast {
+  margin: 30px 9px 25px 9px;
+  padding: 0 9px;
+}
+
+.forecast .card {
+  text-align: center;
+  border: 1.5px #a0ddf7 solid;
+  border-radius: 45%;
+  font-size: 12px;
+}
+
+.forecastIcon {
+  font-size: 3vw;
+  padding: 5px;
+}
+
+.bodyCelsiusFahrenheit {
+  font-size: 14px;
+}

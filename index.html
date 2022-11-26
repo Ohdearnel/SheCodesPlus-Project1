@@ -4,11 +4,204 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Git respository</title>
-    <link rel="stylesheet" href="styles.css" />
+    <title>2.0 Weather App</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Fuzzy+Bubbles:wght@400;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <script
+      src="https://kit.fontawesome.com/cde06a95de.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+
+    <link rel="stylesheet" href="src/styles.css" />
   </head>
+
   <body>
-    <h1>Git respository</h1>
-    <script src="index.js"></script>
+    <div class="container">
+      <div class="contentCard">
+        <form id="search-form">
+          <div class="row">
+            <div class="col-8">
+              <input
+                type="text"
+                id="search-input"
+                placeholder="Search for a city"
+                class="citySearch p-1 w-100"
+              />
+            </div>
+            <div class="col-2 searchContainer">
+              <button type="submit" class="btn btn-info searchButton">
+                Search
+              </button>
+            </div>
+            <div class="col-2 flex-container currentButtonContainer">
+              <button
+                type="button"
+                class="btn btn-info currentLocationButton"
+                id="current-button"
+              >
+                📍
+              </button>
+            </div>
+          </div>
+        </form>
+
+        <div class="row">
+          <div class="col">
+            <div class="row">
+              <div class="col">
+                <div class="placeName" id="place-name"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="row">
+              <div class="col">
+                <div class="description" id="description"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <div class="placeName" id="place-name"></div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-5">
+            <div class="row">
+              <div class="col">
+                <heading>Current temp:</heading>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <heading>Day<strong> | </strong>Time:</heading>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <heading>Highs<strong> | </strong>Lows of:</heading>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-3">
+            <div class="row">
+              <div class="col">
+                <div class="temperature">
+                  <span id="body-temperature"></span>°c
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <div class="time" id="current-time"></div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <div class="mainHighsLows">
+                  <span id="mainHighs"></span>°c | <span id="mainLows"></span>°c
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-4 flex-container">
+            <i class="fa-solid fa-sun mainIcon"></i>
+          </div>
+        </div>
+
+        <section class="forecast">
+          <div class="row">
+            <div class="col">
+              <div class="card">
+                <div class="card-body">
+                  <span class="dayCast monday">Mon</span> <br /><i
+                    class="fa-regular fa-snowflake forecastIcon monIcon"
+                  ></i
+                  ><br />
+                  <strong> 17°c </strong>| 13°c
+                </div>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="card">
+                <div class="card-body">
+                  <span class="dayCast tuesday">Tues</span> <br /><i
+                    class="fa-solid fa-cloud-sun forecastIcon tuesIcon"
+                  ></i>
+                  <br />
+                  <strong> 17°c </strong>| 13°c
+                </div>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="card">
+                <div class="card-body">
+                  <span class="wednesday dayCast">Wed</span>
+                  <br />
+                  <i class="fa-solid fa-cloud-bolt wedIcon forecastIcon"></i>
+                  <br />
+                  <strong> 17°c </strong>| 13°c
+                </div>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="card">
+                <div class="card-body">
+                  <span class="thursday dayCast">Thur</span> <br />
+                  <i class="fa-solid fa-rainbow thurIcon forecastIcon"></i>
+                  <br />
+                  <strong> 17°c </strong>| 13°c
+                </div>
+              </div>
+            </div>
+
+            <div class="col">
+              <div class="card">
+                <div class="card-body">
+                  <span class="friday dayCast">Fri</span> <br />
+                  <i class="fa-solid fa-cloud-rain friIcon forecastIcon"></i>
+                  <br />
+                  <strong> 17°c </strong>| 13°c
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <div id="app"></div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+      crossorigin="anonymous"
+    ></script>
+    <script src="src/index.js"></script>
   </body>
 </html>
