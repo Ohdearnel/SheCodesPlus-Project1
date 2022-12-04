@@ -1,5 +1,6 @@
 //current time and day function
-function whatsTheTime(date) {
+function formatDate(timestamp) {
+  let date = new Date(timestamp);
   let days = [
     "Sunday",
     "Monday",
@@ -19,36 +20,47 @@ function whatsTheTime(date) {
   if (minutes < 10) {
     minutes = `0${minutes}`;
   }
-
   return `${weekday}, ${hours}:${minutes}`;
 }
-
-let theTime = document.querySelector("#current-time");
-let now = new Date();
-
-theTime.innerHTML = whatsTheTime(now);
 
 //search box function
 
 function showCityWeather(response) {
   console.log(response);
-  document.querySelector("#place-name").innerHTML = response.data.name;
-  document.querySelector("#body-temperature").innerHTML = Math.round(
-    response.data.main.temp
-  );
-  document.querySelector("#mainHighs").innerHTML = Math.round(
-    response.data.main.temp_max
-  );
-  document.querySelector("#mainLows").innerHTML = Math.round(
-    response.data.main.temp_min
-  );
+  document.querySelector("#place-name").innerHTML = response.data.city;
+
   document.querySelector("#description").innerHTML =
-    response.data.weather[0].description;
+    response.data.condition.description;
+
+  document.querySelector("#body-temperature").innerHTML = `${Math.round(
+    response.data.temperature.current
+  )}°c`;
+
+  document.querySelector("#current-time").innerHTML = formatDate(
+    response.data.time * 1000
+  );
+
+  document.querySelector("#humidity").innerHTML =
+    response.data.temperature.humidity;
+
+  document.querySelector("#wind-speed").innerHTML = Math.round(
+    response.data.wind.speed
+  );
+
+  document
+    .querySelector("#main-icon")
+    .setAttribute("src", `${response.data.condition.icon_url}`);
+
+  document
+    .querySelector("#main-icon")
+    .setAttribute("alt", `${response.data.condition.description}`);
+
+  celsiusTemperature = response.data.temperature.current;
 }
 
 function searchCity(city) {
-  let apiKey = "502dc8f7ae36e57af1974e18d16a86f8";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  let apiKey = "f65b33ot2ea727d4e0e7bcb38f9d0783";
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
   axios.get(apiUrl).then(showCityWeather);
 }
 
@@ -58,18 +70,45 @@ function citySearchSubmit(event) {
   searchCity(city);
 }
 
+function showFahrenheit(event) {
+  event.preventDefault();
+  fahrenheitLink.classList.add("active");
+  celsiusLink.classList.remove("active");
+  let temperatureElement = document.querySelector("#body-temperature");
+  let fahrenheit = (celsiusTemperature * 9) / 5 + 32;
+
+  temperatureElement.innerHTML = `${Math.round(fahrenheit)}°f`;
+}
+
+function showCelsius(event) {
+  event.preventDefault();
+  celsiusLink.classList.add("active");
+  fahrenheitLink.classList.remove("active");
+  let temperatureElement = document.querySelector("#body-temperature");
+  temperatureElement.innerHTML = `${Math.round(celsiusTemperature)}°c`;
+}
+
 let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", citySearchSubmit);
+
+let celsiusTemperature = null;
+
+let fahrenheitLink = document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click", showFahrenheit);
+
+let celsiusLink = document.querySelector("#celsius-link");
+celsiusLink.addEventListener("click", showCelsius);
 
 searchCity("Manchester");
 
 //current location function
 
 function searchLocation(position) {
+  console.log(position);
   let lat = position.coords.latitude;
   let lon = position.coords.longitude;
-  let apiKey = `502dc8f7ae36e57af1974e18d16a86f8`;
-  let weatherApiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+  let apiKey = `f65b33ot2ea727d4e0e7bcb38f9d0783`;
+  let weatherApiUrl = `https://api.shecodes.io/weather/v1/current?lon=${lon}&lat=${lat}&key=${apiKey}`;
   axios.get(weatherApiUrl).then(showCityWeather);
 }
 

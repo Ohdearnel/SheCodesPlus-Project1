@@ -86,7 +86,23 @@
           <div class="col-5">
             <div class="row">
               <div class="col">
-                <heading>Current temp:</heading>
+                <heading class="weather-temperature"
+                  >Current temp: (
+                  <a
+                    href="#"
+                    class="bodyCelsiusFahrenheit celsius active"
+                    id="celsius-link"
+                    >°c</a
+                  >
+                  <strong> | </strong>
+                  <a
+                    href="#"
+                    class="bodyCelsiusFahrenheit fahrenheit"
+                    id="fahrenheit-link"
+                    >°f</a
+                  >
+                  )</heading
+                >
               </div>
             </div>
 
@@ -98,7 +114,12 @@
 
             <div class="row">
               <div class="col">
-                <heading>Highs<strong> | </strong>Lows of:</heading>
+                <heading>Humidity:</heading>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <heading>Wind speed:</heading>
               </div>
             </div>
           </div>
@@ -107,7 +128,7 @@
             <div class="row">
               <div class="col">
                 <div class="temperature">
-                  <span id="body-temperature"></span>°c
+                  <span id="body-temperature">°c</span>
                 </div>
               </div>
             </div>
@@ -120,15 +141,26 @@
 
             <div class="row">
               <div class="col">
-                <div class="mainHighsLows">
-                  <span id="mainHighs"></span>°c | <span id="mainLows"></span>°c
+                <div class="mainHumidity"><span id="humidity"></span>%</div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col">
+                <div class="main-wind-speed">
+                  <span id="wind-speed"></span>km/h
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="col-4 flex-container">
-            <i class="fa-solid fa-sun mainIcon"></i>
+          <div class="col-4">
+            <img
+              src="https://ssl.gstatic.com/onebox/weather/64/cloudy.png"
+              alt="Cloudy"
+              id="main-icon"
+              class="weather-icon"
+            />
           </div>
         </div>
 

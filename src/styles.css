@@ -8,10 +8,14 @@ body {
   font-family: "Poppins", sans-serif;
 }
 
+heading {
+  font-size: 14px;
+}
+
 div.placeName {
   font-family: "Barlow", sans-serif;
   color: rgb(161, 161, 255);
-  margin: 10px 20px 10px 20px;
+  margin: 10px 20px 0 20px;
   padding-left: 20px;
   font-weight: 600;
   font-size: 34px;
@@ -23,8 +27,16 @@ div.description {
   text-transform: capitalize;
 }
 
-heading {
-  font-size: 14px;
+.description:first-letter {
+  text-transform: capitalize;
+}
+
+.contentCard {
+  padding: 10px 0;
+  margin: 50px auto 23px;
+  background: #fff;
+  max-width: 700px;
+  min-width: 500px;
 }
 
 .citySearch {
@@ -53,15 +65,26 @@ heading {
 
 heading,
 .temperature,
-.mainHighsLows {
+.mainHumidity {
   display: block;
   line-height: 45px;
   margin-left: 33px;
 }
 
+.weather-temperature .active {
+  color: black;
+  cursor: default;
+  text-decoration: none;
+}
+
+.weather-temperature .active :hover {
+  text-decoration: none;
+}
+
 .temperature,
 .time,
-.mainHighsLows {
+.mainHumidity,
+.main-wind-speed {
   text-align: right;
   font-weight: 600;
   white-space: nowrap;
@@ -70,29 +93,26 @@ heading,
 }
 
 .temperature,
-.mainHighsLows {
+.mainHumidity {
   font-size: 15px;
 }
 
-.time {
+.time,
+.main-wind-speed {
   line-height: 45px;
   font-size: 14px;
 }
 
-.contentCard {
-  padding: 10px 0;
-  margin: 50px auto 23px;
-  background: #fff;
+.bodyCelsiusFahrenheit {
+  font-size: 14px;
 }
 
-.flex-container > .mainIcon {
-  display: inline-block;
-  font-size: 14vw;
-  text-align: center;
-  color: rgb(252, 216, 98);
-  border: 1px #a0ddf7 solid;
-  padding: 15px;
-  margin: 15px 15px 0 0;
+.weather-icon {
+  margin-left: 30px;
+  margin-top: 20px;
+  padding: 5px;
+  font-size: 20px;
+  border: #a0ddf7 solid 1px;
 }
 
 .dayCast {
@@ -118,10 +138,6 @@ heading,
 .forecastIcon {
   font-size: 3vw;
   padding: 5px;
-}
-
-.bodyCelsiusFahrenheit {
-  font-size: 14px;
 }
 
 footer {
