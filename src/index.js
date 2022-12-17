@@ -23,6 +23,66 @@ function formatDate(timestamp) {
   return `${weekday}, ${hours}:${minutes}`;
 }
 
+//forecast function
+function formatForecastDate(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  let day = date.getDay(days);
+
+  return days[day];
+}
+
+function displayForecast(response) {
+  let forecast = response.data.daily;
+
+  let forecastElement = document.querySelector("#forecast");
+
+  let forecastHTML = `<div class="row">`;
+
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 4) {
+      forecastHTML =
+        forecastHTML +
+        `
+          <div class="col-3">
+            <div class="card">
+              <div class="card-body">
+                <div class="dayCast weather-forecast-date">
+                  ${formatForecastDate(forecastDay.time)}
+                </div>
+                <img
+                  src= ${forecastDay.condition.icon_url}
+                  alt= ${forecastDay.condition.icon}
+                  id="forecast-icon"
+                  class="forecastIcon"
+                  width="40"
+                />
+                <div class="weather-forecast-temperature">
+                  <span class="weather-forecast-temperature-max">${Math.round(
+                    forecastDay.temperature.maximum
+                  )}°c</span
+                  ><strong> | </strong <span class="weather-forecast-temperature-min">${Math.round(
+                    forecastDay.temperature.minimum
+                  )}°c</span>
+              </div>
+            </div>
+          </div>`;
+    }
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
+function getForecast(coordinates) {
+  let lat = coordinates.latitude;
+  let lon = coordinates.longitude;
+  let apiKey = `f65b33ot2ea727d4e0e7bcb38f9d0783`;
+  let forecastApiUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${lon}&lat=${lat}&key=${apiKey}&units=metric`;
+
+  axios.get(forecastApiUrl).then(displayForecast);
+}
+
 //search box function
 
 function showCityWeather(response) {
@@ -56,6 +116,8 @@ function showCityWeather(response) {
     .setAttribute("alt", `${response.data.condition.description}`);
 
   celsiusTemperature = response.data.temperature.current;
+
+  getForecast(response.data.coordinates);
 }
 
 function searchCity(city) {

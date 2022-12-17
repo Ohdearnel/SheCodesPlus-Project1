@@ -73,6 +73,10 @@ heading,
   margin-left: 33px;
 }
 
+div.placeName {
+  padding-left: 10px;
+}
+
 .weather-temperature .active {
   color: black;
   cursor: default;
@@ -121,15 +125,12 @@ heading,
   font-size: 14px;
 }
 
-.forecast {
-  text-align: center;
-  font-size: 12px;
-}
-
 .forecast .card {
   border: 1.5px #a0ddf7 solid;
   border-radius: 45%;
   margin-left: 5px;
+  font-size: 12px;
+  text-align: center;
 }
 
 .forecastIcon {
