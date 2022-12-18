@@ -65,6 +65,7 @@ function displayForecast(response) {
                     forecastDay.temperature.minimum
                   )}°c</span>
               </div>
+                </div>
             </div>
           </div>`;
     }

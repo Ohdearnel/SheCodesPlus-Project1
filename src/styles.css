@@ -32,6 +32,14 @@ div.description {
   text-transform: capitalize;
 }
 
+div.col-3,
+.col-4 {
+  padding: 0;
+}
+
+.forecast-wrapper {
+  margin: 30px 25px 0 20px;
+}
 .contentCard {
   padding: 10px 0;
   margin: 50px auto 23px;
