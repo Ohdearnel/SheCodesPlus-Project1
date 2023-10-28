@@ -33,14 +33,21 @@ function formatForecastDate(timestamp) {
 }
 
 function displayForecast(response) {
+  console.log(response);
   let forecast = response.data.daily;
 
   let forecastElement = document.querySelector("#forecast");
 
   let forecastHTML = `<div class="row">`;
 
+  //let forecastMax = response.data.daily[0].temperature.maximum;
   forecast.forEach(function (forecastDay, index) {
     if (index < 4) {
+      forecastMax = forecastDay.temperature.maximum;
+      forecastMin = forecastDay.temperature.minimum;
+      console.log(forecastMax, index);
+      console.log(forecastMin, index);
+
       forecastHTML =
         forecastHTML +
         `
@@ -58,12 +65,15 @@ function displayForecast(response) {
                   width="40"
                 />
                 <div class="weather-forecast-temperature">
-                  <span class="weather-forecast-temperature-max">${Math.round(
+                <span class="forecast-max">
+                  <span class="weather-forecast-temperature-max" >${Math.round(
                     forecastDay.temperature.maximum
-                  )}°c</span
-                  ><strong> | </strong <span class="weather-forecast-temperature-min">${Math.round(
+                  )}°c</span>
+                  </span
+                  ><strong> | </strong <span class ="forecast-min"><span class="weather-forecast-temperature-min" >${Math.round(
                     forecastDay.temperature.minimum
                   )}°c</span>
+                  </span>
               </div>
                 </div>
             </div>
@@ -87,7 +97,6 @@ function getForecast(coordinates) {
 //search box function
 
 function showCityWeather(response) {
-  console.log(response);
   document.querySelector("#place-name").innerHTML = response.data.city;
 
   document.querySelector("#description").innerHTML =
@@ -141,6 +150,13 @@ function showFahrenheit(event) {
   let fahrenheit = (celsiusTemperature * 9) / 5 + 32;
 
   temperatureElement.innerHTML = `${Math.round(fahrenheit)}°f`;
+
+  document.querySelector("forecast-max").innerHTML = `${Math.round(
+    (forecastMax * 9) / 5 + 32
+  )}°f`;
+  document.querySelector("forecast-min").innerHTML = `${Math.round(
+    (forecastMin * 9) / 5 + 32
+  )}°f`;
 }
 
 function showCelsius(event) {
@@ -155,6 +171,9 @@ let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", citySearchSubmit);
 
 let celsiusTemperature = null;
+
+let forecastMax = null;
+let forecastMin = null;
 
 let fahrenheitLink = document.querySelector("#fahrenheit-link");
 fahrenheitLink.addEventListener("click", showFahrenheit);
